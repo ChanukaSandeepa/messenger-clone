@@ -3,12 +3,28 @@ import { View, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView } from 
 import { height } from '../constant/display'
 import { AntDesign, Entypo, Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import SendMsg from '../components/SendMsg';
+import ReceivedMsg from '../components/ReceivedMsg';
 
 export default function ChatView() {
     return (
         <View style={styles.container}>
-            <ScrollView style={styles.chatContainer}>
-                <SendMsg/>
+            <ScrollView contentContainerStyle={{flexGrow: 1}} style={styles.chatContainer}>
+                <View style={{flex : 1}}>
+                    <SendMsg msg="Hello there"/>
+                    <ReceivedMsg msg="Hello there"/>
+                    <SendMsg msg="I'm from sri lanka"/>
+                    <SendMsg msg="I'd like to have more friends from Canada. Would you also be one of my canadian friend?"/>
+                    <ReceivedMsg msg="For sure! Are you using whats app or another social medeia? If you please give me your contacts"/>
+                    <SendMsg msg="Of counse."/>
+                    <SendMsg msg="+94766471255"/>
+                    <ReceivedMsg msg="Thanks mate!"/>
+                    <ReceivedMsg msg="I'll contact you later now i'm in a lecture."/>
+                    <SendMsg msg="No problem. That means you are still studying."/>
+                    <SendMsg msg="I'm too still studying and I'm dong computer sceince"/>
+                    <ReceivedMsg msg="That's very cool!"/>
+                    <ReceivedMsg msg="I'm a software developer"/>
+                    <ReceivedMsg msg="We are in the same field. Such a amaing thing bro!"/>
+                </View>
             </ScrollView>
             <View style={styles.inputContainer}>
                 <TouchableOpacity style={styles.icon}>
@@ -43,6 +59,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     chatContainer : {
+
     },
     inputContainer : {
         height : height / 15,
