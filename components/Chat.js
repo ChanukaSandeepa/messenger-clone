@@ -5,7 +5,10 @@ import { height, width } from '../constant/display'
 
 const Chat = ({isLastMessageIYours, isSeen, message, name,navigation}) => {
     return (
-        <TouchableOpacity onPress={ () =>  navigation.navigate('ChatView')} style={styles.container}>
+        <TouchableOpacity onPress={ () =>  {
+                navigation.navigate('ChatView',{user : 'Osandi'})
+            }
+        } style={styles.container}>
             <View style={styles.proPicContainer}>
                 <Image style={styles.proPic} source={{ uri : 'https://lh3.googleusercontent.com/-ip0x0Nhkrnk/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclaLasCFZ0BnSsnJ5Zxt2DsBc-RrQ/s48-c/photo.jpg' }}/>
             </View>
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
         width : '100%',
         height : height / 12,
         paddingHorizontal : 8,
-        marginVertical : 5
+        marginVertical : 4
     },
     proPicContainer : {
         width : '17%',
