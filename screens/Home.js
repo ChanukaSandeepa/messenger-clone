@@ -7,6 +7,9 @@ import CreateRoom from '../components/CreateRoom'
 import Chat from '../components/Chat'
 
 const Home =  ({navigation}) => {
+
+    
+
     return (
         <ScrollView contentContainerStyle={{ alignItems : 'center' }} style={styles.container}>
             <View style={styles.searchContainer}>

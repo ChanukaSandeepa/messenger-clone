@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
@@ -6,61 +6,69 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home'
 import { Button, View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { Ionicons, MaterialCommunityIcons, FontAwesome5, FontAwesome } from '@expo/vector-icons'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Users from '../screens/Users';
 import { height } from '../constant/display';
 import ChatView from '../screens/ChatView';
+import Stories from '../screens/Stories';
+import Animated from 'react-native-reanimated';
 
 export default function Navigator() {
 
     const Stack = createStackNavigator()
     const Drawer = createDrawerNavigator()
     const Tab = createBottomTabNavigator();
+    const TopTab = createMaterialTopTabNavigator()
+    const [val, setVal] = useState(0)
 
     return (
         <NavigationContainer>
             <Stack.Navigator>
                     <Stack.Screen 
                         options={
-                            {
-                                title : "Chats",
-                                headerLeft : () => {
-                                    return <Image style={styles.profilePic} source={{ uri : 'https://lh3.googleusercontent.com/a-/AOh14GjFaBav6WujfOcQwyJIAqzA8U9vNiKykRFcfxnAjA=s88-c-k-c0x00ffffff-no-rj-mo' }}/>
-                                },
-                                headerRight : () => {
-                                    return <View style={styles.headerLeftContainer}>
-                                        <TouchableOpacity style={styles.headerRightButton}>
-                                            <Ionicons style={{paddingHorizontal : 3}} size={25} name="ios-camera"/>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity style={styles.headerRightButton}>
-                                            <Ionicons style={{paddingHorizontal : 3}} size={25} name="md-create"/>
-                                        </TouchableOpacity>
-                                    </View>
-                                },
-                                headerLeftContainerStyle : {
-                                    paddingLeft : 10
-                                },
-                                headerRightContainerStyle : {
-                                    paddingRight : 10
-                                },
-                                headerTitleContainerStyle : {
-                                    margin : 0
-                                },
-                                headerStyle : {
-                                    elevation : 0
-                                },
-                                
+                            ({navigation, route}) => {
+                                console.log(route.params)
+                                return {
+                                    title : "Chats",
+                                    headerLeft : () => {
+                                        return <Image style={styles.profilePic} source={{ uri : 'https://lh3.googleusercontent.com/a-/AOh14GjFaBav6WujfOcQwyJIAqzA8U9vNiKykRFcfxnAjA=s88-c-k-c0x00ffffff-no-rj-mo' }}/>
+                                    },
+                                    headerRight : () => {
+                                        return <View style={styles.headerLeftContainer}>
+                                            <TouchableOpacity style={styles.headerRightButton}>
+                                                <Ionicons style={{paddingHorizontal : 3}} size={25} name="ios-camera"/>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity style={styles.headerRightButton}>
+                                                <Ionicons style={{paddingHorizontal : 3}} size={25} name="md-create"/>
+                                            </TouchableOpacity>
+                                        </View>
+                                    },
+                                    headerLeftContainerStyle : {
+                                        paddingLeft : 10
+                                    },
+                                    headerRightContainerStyle : {
+                                        paddingRight : 10
+                                    },
+                                    headerTitleContainerStyle : {
+                                        margin : 0
+                                    },
+                                    headerStyle : {
+                                        elevation : 0
+                                    },
+                                    
+                                }
                             }
                         } 
                         name="Home">
                                 {() => {
                                     return (
                                         <Tab.Navigator 
-                                            screenOptions={({route}) => ({
+                                            screenOptions={({route,navigation}) => ({
                                                 tabBarIcon : ({ focused, color, size }) => {
                                                     if (route.name === 'Main') {
-                                                    return <MaterialCommunityIcons name="chat" size={size} color={color} />;
+                                                        return <MaterialCommunityIcons name="chat" size={size} color={color} />;
                                                     } else if (route.name === 'Users') {
-                                                    return <FontAwesome5 name="user-friends" size={size} color={color}/>
+                                                        return <FontAwesome5 name="user-friends" size={size} color={color}/>
                                                     }
                                                 }
                                             })}
@@ -80,9 +88,78 @@ export default function Navigator() {
                                                     labelPosition : "below-icon"
                                                 }
                                             }
+                                            
                                         >
                                         <Tab.Screen options={ { title : 'Chats' } } name="Main" component={Home}/>
-                                        <Tab.Screen options={ { title : 'People' } } name="Users" component={Users} />
+                                        <Tab.Screen options={ { title : 'People' } } name="Users">
+                                            {
+                                                () => {
+                                                    return (
+                                                        <TopTab.Navigator
+                                                            tabBar={({ state, descriptors, navigation, position }) => {
+                                                                return (
+                                                                <View style={styles.topTabContainer}>
+                                                                    {state.routes.map((route, index) => {
+                                                                        const { options } = descriptors[route.key];
+                                                                        const label =
+                                                                        options.tabBarLabel !== undefined
+                                                                            ? options.tabBarLabel
+                                                                            : options.title !== undefined
+                                                                            ? options.title
+                                                                            : route.name;
+
+                                                                        const isFocused = state.index === index;
+
+                                                                        const onPress = () => {
+                                                                            const event = navigation.emit({
+                                                                                type: 'tabPress',
+                                                                                target: route.key,
+                                                                            });
+
+                                                                            if (!isFocused && !event.defaultPrevented) {
+                                                                                navigation.navigate(route.name);
+                                                                            }
+                                                                        };
+
+                                                                        const onLongPress = () => {
+                                                                            navigation.emit({
+                                                                                type: 'tabLongPress',
+                                                                                target: route.key,
+                                                                            });
+                                                                        };
+                                                                            // modify inputRange for custom behavior
+                                                                        const inputRange = state.routes.map((_, i) => i);
+                                                                        const opacity = Animated.interpolate(position, {
+                                                                            inputRange,
+                                                                            outputRange: inputRange.map(i => (i === index ? 1 : 0)),
+                                                                        });
+
+                                                                        return (
+                                                                            <TouchableOpacity
+                                                                                key={index}
+                                                                                accessibilityRole="button"
+                                                                                accessibilityState={isFocused ? { selected: true } : {}}
+                                                                                accessibilityLabel={options.tabBarAccessibilityLabel}
+                                                                                testID={options.tabBarTestID}
+                                                                                onPress={onPress}
+                                                                                onLongPress={onLongPress}
+                                                                                style={{...styles.topTab, backgroundColor : isFocused ? 'rgba(211,211,211,0.3)' : 'white'}}
+                                                                            >
+                                                                                <Animated.Text style={{...styles.topTabTitle, color : isFocused ? 'black' : 'gray'}}>{label}</Animated.Text>
+                                                                            </TouchableOpacity>
+                                                                        );
+                                                                    })}
+                                                                    </View>)
+                                                            }}
+                                                            
+                                                        >
+                                                            <TopTab.Screen name="USERS" component={Users} />
+                                                            <TopTab.Screen name="STORIES" component={Stories} />
+                                                        </TopTab.Navigator>
+                                                    )
+                                                }
+                                            }
+                                        </Tab.Screen>
                                     </Tab.Navigator>
                                     )
                                 }}
@@ -144,7 +221,7 @@ const styles = StyleSheet.create({
         backgroundColor : 'rgba(211,211,211,0.2)',
         borderRadius : 200,
         padding : 5,
-        marginHorizontal : 2
+        marginHorizontal : 5
     },
     headerLeftContainer : {
         flexDirection : 'row', 
@@ -178,5 +255,21 @@ const styles = StyleSheet.create({
     },
     info : {
         paddingHorizontal : 10
+    },
+    topTabContainer : { 
+        flexDirection: 'row', 
+        paddingVertical: 20,
+        backgroundColor : 'white'
+    },
+    topTab : { 
+        flex: 1, backgroundColor : 'red' ,
+        marginHorizontal : 10,
+        backgroundColor : 'rgba(211,211,211,0.3)',
+        borderRadius : 20,
+        alignItems : 'center'
+    },
+    topTabTitle : {
+        padding : 5,
+        fontSize : 13
     }
 })

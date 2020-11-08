@@ -8,7 +8,7 @@ export default function ReceivedMsg({msg}) {
                 <Image style={styles.proPic} source={{ uri : 'https://lh3.googleusercontent.com/a-/AOh14GjFaBav6WujfOcQwyJIAqzA8U9vNiKykRFcfxnAjA=s88-c-k-c0x00ffffff-no-rj-mo' }} />
             </View>
             <View style={styles.msgContainer}>
-    <Text style={styles.msg}>{msg}</Text>
+                <Text style={styles.msg}>{msg}</Text>
             </View>
         </View>
     )
