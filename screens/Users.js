@@ -1,28 +1,17 @@
 import React, { useEffect } from 'react'
-import { View,Text, StyleSheet, ScrollView } from 'react-native'
+import { View,Text, StyleSheet, ScrollView, Button } from 'react-native'
 import ActiveUser from '../components/ActiveUser'
+import { useAppContext } from '../context/Context'
+import { CHANGE_HEADER } from '../context/reducer'
 
 export default function Users({navigation, route}) {
 
-    React.useEffect(() => {
-        if(navigation){
-            const unsubscribe = navigation.addListener('tabPress', (e) => {
-                console.log(e)
-                // Prevent default behavior
-                // e.preventDefault();
-            
-                // Do something manually
-                // ...
-              });
-            
-              return unsubscribe;
-        }
-      }, [navigation]);
+    const [{}, dispatch] = useAppContext()
 
       useEffect(() => {
         if(navigation.isFocused()){
-            console.log('trigger')
-            navigation.setParams({user : 'Chanuka'})
+            console.log("focused",'Tabss', navigation.isFocused())
+            dispatch({ type : CHANGE_HEADER })
         }
       },[navigation])
 
