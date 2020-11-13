@@ -6,15 +6,6 @@ import { CHANGE_HEADER } from '../context/reducer'
 
 export default function Users({navigation, route}) {
 
-    const [{}, dispatch] = useAppContext()
-
-      useEffect(() => {
-        if(navigation.isFocused()){
-            console.log("focused",'Tabss', navigation.isFocused())
-            dispatch({ type : CHANGE_HEADER })
-        }
-      },[navigation])
-
     return (
         <View style={styles.container}>
             <ScrollView>

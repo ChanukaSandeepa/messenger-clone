@@ -1,15 +1,19 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import {View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import {View, Text, Image, StyleSheet, TouchableOpacity, Button } from 'react-native'
 import { Ionicons, FontAwesome5, FontAwesome } from '@expo/vector-icons'
 import ChatView from '../screens/ChatView';
 import HomeTabs from './HomeTabs';
 import HomeHeaderButton from './HomeHeaderButton';
+import { useAppContext } from '../context/Context'
+import AllPeople from '../screens/AllPeople'
+import AddContacts from '../screens/AddContacts'
 
 export default function Navigator() {
 
     const Stack = createStackNavigator()
+    const [{ header, headerTitle }, dispatch] = useAppContext()
 
     return (
         <NavigationContainer>
@@ -19,12 +23,12 @@ export default function Navigator() {
                             ({navigation, route}) => {
                                 console.log(route.params, "damn")
                                 return {
-                                    title : "Chats",
+                                    title : headerTitle,
                                     headerLeft : () => {
                                         return <Image style={styles.profilePic} source={{ uri : 'https://lh3.googleusercontent.com/a-/AOh14GjFaBav6WujfOcQwyJIAqzA8U9vNiKykRFcfxnAjA=s88-c-k-c0x00ffffff-no-rj-mo' }}/>
                                     },
                                     headerRight : () => {
-                                        return <HomeHeaderButton/>
+                                        return !header ? <HomeHeaderButton navigation={navigation}/> : <HomeHeaderButton navigation={navigation} changeToUserPanel={true}/>
                                     },
                                     headerLeftContainerStyle : {
                                         paddingLeft : 10
@@ -42,7 +46,7 @@ export default function Navigator() {
                                 }
                             }
                         } 
-                        name="Home" component={HomeTabs} />
+                        name="Home"  component={HomeTabs} />
                     <Stack.Screen options={ ({ navigation, route }) => { 
                         return {
                             title : null,
@@ -85,6 +89,20 @@ export default function Navigator() {
                             }
                         }
                     } } name="ChatView" component={ChatView} />
+                    <Stack.Screen name="AllPeople" component={AllPeople}
+                        options={
+                            {
+                                title : "All People"
+                            }
+                        }
+                    />
+                    <Stack.Screen name="AddContacts" component={AddContacts}
+                        options={
+                            {
+                                title : "Add Contacts"
+                            }
+                        }
+                    />
             </Stack.Navigator>
         </NavigationContainer>
     )

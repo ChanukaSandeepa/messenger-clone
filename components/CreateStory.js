@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import { Entypo } from '@expo/vector-icons';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 export default function CreateStory({color}) {
     return (
@@ -18,7 +19,7 @@ export default function CreateStory({color}) {
 const styles = StyleSheet.create({
     container : {
         flex : 1,
-        height : 210,
+        height : responsiveHeight(30),
         padding : 5
     },
     content : {
@@ -29,8 +30,8 @@ const styles = StyleSheet.create({
     },
     proPicContainer : {
         position: 'absolute',
-        width : 42,
-        height : 42,
+        width : responsiveHeight(6),
+        height : responsiveHeight(6),
         backgroundColor: 'white',
         borderColor : 'blue',
         borderWidth : 2,
@@ -41,8 +42,8 @@ const styles = StyleSheet.create({
         alignItems : 'center'
     },
     proPic : {
-        width : 35,
-        height : 35,
+        width : responsiveHeight(5),
+        height : responsiveHeight(5),
         borderRadius : 200
     },
     image : {

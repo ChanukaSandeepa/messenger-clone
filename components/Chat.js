@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { height, width } from '../constant/display'
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions'
 
 const Chat = ({isLastMessageIYours, isSeen, message, name,navigation}) => {
     return (
@@ -23,7 +24,7 @@ const Chat = ({isLastMessageIYours, isSeen, message, name,navigation}) => {
             </View>
             {isLastMessageIYours && <View style={styles.seenProPicContainer}>
                 {isSeen ? <View style={styles.deliveryMarkContainer}>
-                    <Ionicons name="ios-checkmark" size={17} color="white" />
+                    <Ionicons name="ios-checkmark" size={responsiveFontSize(2)} color="white" />
                 </View> :
                 <Image style={styles.seenProPic} source={{ uri : 'https://lh3.googleusercontent.com/-tEHKy1mO0Tk/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucla6TnZtNKKBT3UXR00-iky4VvXsA/s48-c/photo.jpg' }}/>
                 }</View>}
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     container : {
         flexDirection : 'row',
         width : '100%',
-        height : height / 12,
+        height : responsiveHeight(9),
         paddingHorizontal : 8,
         marginVertical : 4
     },
@@ -45,47 +46,47 @@ const styles = StyleSheet.create({
         alignItems : 'center'
     },
     proPic : {
-        width : '90%',
-        height : '90%',
+        width : responsiveHeight(7),
+        height : responsiveHeight(7),
         borderRadius : 200
     },
     descriptionContainer : {
         flex : 1,
-        paddingLeft : 10
+        paddingLeft : responsiveWidth(2)
     },
     nameContainer : {
         height : '50%',
         justifyContent : 'flex-end',
     },
     name : {
-        fontSize : 16,
+        fontSize : responsiveFontSize(2),
         color : 'rgba(0,0,0,0.8)'
     },
     detailsContainer : {
         flexDirection : 'row',
-        height : '50%',
-        // justifyContent :'center',
-        // alignItems : 'center'
+        height : '50%'
     },
     message : {
-        color : 'rgba(0,0,0,0.8)'
+        color : 'rgba(0,0,0,0.8)',
+        fontSize : responsiveFontSize(1.7)
     },
     time : {
         paddingHorizontal : 10,
-        color : 'rgba(0,0,0,0.8)'
+        color : 'rgba(0,0,0,0.8)',
+        fontSize : responsiveFontSize(1.5)
     },
     seenProPicContainer : {
         justifyContent : 'center',
         alignItems : 'center'
     },
     seenProPic : {
-        width : 15,
-        height : 15,
+        width : responsiveHeight(2),
+        height : responsiveHeight(2),
         borderRadius : 200
     },
     deliveryMarkContainer : {
-        width : 15,
-        height : 15,
+        width : responsiveHeight(2),
+        height : responsiveHeight(2),
         justifyContent : 'center',
         alignItems : 'center',
         backgroundColor : 'rgba(211,211,211,0.8)',

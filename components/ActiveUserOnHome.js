@@ -1,40 +1,35 @@
 import React from 'react'
-import { ActivityIndicator, View, Text, Image, StyleSheet } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
-import { width } from '../constant/display'
+import { View, Text, Image, StyleSheet, PixelRatio, TouchableOpacity } from 'react-native'
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions'
 
 const ActiveUserOnHome = () => {
+
+
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container}>
             <View style={styles.imageCotainer}>
                 <Image style={styles.image} source={ { uri : 'https://lh3.googleusercontent.com/a-/AOh14GjFaBav6WujfOcQwyJIAqzA8U9vNiKykRFcfxnAjA=s88-c-k-c0x00ffffff-no-rj-mo' } }/>
                 <View style={styles.onlineStatus}/>
             </View>
-            <Text style={styles.name}>Sandeepa</Text>
-        </View>
+            <Text style={styles.name}>Chanuka Sandeepa</Text>
+        </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
     container : {
-        width : width / 5,
-        padding : 3,
+        width : responsiveWidth(20),
         justifyContent : 'center',
-        alignItems : 'center',
+        alignItems : 'center'
     },
     imageCotainer : {
-        height : '65%',
-        width : '80%',
-        paddingHorizontal : 2,
-        position : 'relative',
-        paddingBottom : 0
+        height : responsiveHeight(7),
+        width : responsiveHeight(7)
     },
     name : {
-        height : '35%',
+        flex : 1,
         textAlign : 'center',
-        fontSize : 13,
-        lineHeight : 13,
-        textAlignVertical : "center"
+        fontSize : responsiveFontSize(1.5),
     },
     image : {
         width : '100%',

@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Text, Image } from 'react-native'
+import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions'
 
 export default function ReceivedMsg({msg}) {
     return (
@@ -28,7 +29,8 @@ const styles = StyleSheet.create({
     },
     msg : { 
         color : 'black',
-        fontWeight : '500'
+        fontWeight : '500',
+        fontSize : responsiveFontSize(1.9)
     },
     proPicContainer : {
         display : 'flex',
@@ -37,8 +39,8 @@ const styles = StyleSheet.create({
         // backgroundColor : 'red'
     },
     proPic : {
-        width : 27,
-        height : 27,
+        width : responsiveHeight(4),
+        height : responsiveHeight(4),
         borderRadius : 200
     }
 })

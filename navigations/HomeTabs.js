@@ -8,32 +8,28 @@ import Users from '../screens/Users';
 import { height } from '../constant/display';
 import Stories from '../screens/Stories';
 import Animated from 'react-native-reanimated';
+import { useAppContext } from '../context/Context';
+import { CHANGE_HEADER } from '../context/reducer';
+import { responsiveFontSize, responsiveHeight  } from 'react-native-responsive-dimensions'
 
 export default function HomeTabs() {
 
     const Tab = createBottomTabNavigator();
     const TopTab = createMaterialTopTabNavigator()
+    const [{haeder}, dispatch] = useAppContext()
 
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
+                tabBarIcon: ({ focused, color }) => {
                     if (route.name === 'Main') {
-                        return <MaterialCommunityIcons name="chat" size={size} color={color} />;
+                        return <MaterialCommunityIcons name="chat" size={responsiveFontSize(3)} color={color} />;
                     } else if (route.name === 'Users') {
-                        
-                        return <FontAwesome5 name="user-friends" size={size} color={color} />
+                        return <FontAwesome5 name="user-friends" size={responsiveFontSize(3)} color={color} />
                     }
-                }
+                },
+                
             })}
-            tabBar={
-                ({state,navigation})=> {
-                    const unsubscribe = navigation.addListener('tabPress', (e) => {
-                        console.log(e)
-                    });
-                    return unsubscribe;
-                }
-            }
             tabBarOptions={
                 {
                     activeTintColor: 'black',
@@ -45,16 +41,42 @@ export default function HomeTabs() {
                         padding: 10
                     },
                     labelStyle: {
-                        fontSize: 13,
+                        fontSize: responsiveFontSize(1.5),
                     },
                     labelPosition: "below-icon",
-                    
+
                 }
             }
 
         >
-            <Tab.Screen options={{ title: 'Chats' }} name="Main" component={Home} />
-            <Tab.Screen  options={{ title: 'People' }} name="Users">
+            <Tab.Screen
+                listeners={({ navigation, route }) => ({
+                    tabPress: e => {
+                        // e.preventDefault()
+                        dispatch({
+                            type : CHANGE_HEADER,
+                            payload : {
+                                status : false,
+                                title : 'Chats'
+                            }
+                        })
+                    }
+                })}
+                options={{ title: 'Chats' }} name="Main" component={Home} />
+            <Tab.Screen
+                listeners={({ navigation, route }) => ({
+                    tabPress: e => {
+                        // e.preventDefault()
+                        dispatch({
+                            type : CHANGE_HEADER,
+                            payload : {
+                                status : true,
+                                title : 'Users'
+                            }
+                        })
+                    }
+                })}
+                options={{ title: 'People' }} name="Users">
                 {
                     () => {
                         return (
@@ -91,7 +113,7 @@ export default function HomeTabs() {
                                                         target: route.key,
                                                     });
                                                 };
-                                                
+
 
                                                 return (
                                                     <TouchableOpacity
@@ -124,20 +146,20 @@ export default function HomeTabs() {
 }
 
 const styles = StyleSheet.create({
-    topTabContainer : { 
-        flexDirection: 'row', 
+    topTabContainer: {
+        flexDirection: 'row',
         paddingVertical: 20,
-        backgroundColor : 'white'
+        backgroundColor: 'white'
     },
-    topTab : { 
-        flex: 1, backgroundColor : 'red' ,
-        marginHorizontal : 10,
-        backgroundColor : 'rgba(211,211,211,0.3)',
-        borderRadius : 20,
-        alignItems : 'center'
+    topTab: {
+        flex: 1, backgroundColor: 'red',
+        marginHorizontal: 10,
+        backgroundColor: 'rgba(211,211,211,0.3)',
+        borderRadius: 20,
+        alignItems: 'center'
     },
-    topTabTitle : {
+    topTabTitle: {
         padding : 5,
-        fontSize : 13
+        fontSize: responsiveFontSize(1.8)
     }
 })

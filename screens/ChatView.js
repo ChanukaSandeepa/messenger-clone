@@ -4,6 +4,7 @@ import { height } from '../constant/display'
 import { AntDesign, Entypo, Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import SendMsg from '../components/SendMsg';
 import ReceivedMsg from '../components/ReceivedMsg';
+import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions'
 
 export default function ChatView() {
     return (
@@ -28,26 +29,25 @@ export default function ChatView() {
             </ScrollView>
             <View style={styles.inputContainer}>
                 <TouchableOpacity style={styles.icon}>
-                    <Entypo name="grid" size={24} color="#006AFF" />
+                    <Entypo name="grid" size={responsiveFontSize(3.5)} color="#006AFF" />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.icon}>
-                    <FontAwesome5 name="camera" size={24} color="#006AFF" />
+                    <FontAwesome5 name="camera" size={responsiveFontSize(3.5)} color="#006AFF" />
                     
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.icon}>
-                    <AntDesign name="picture" size={24} color="#006AFF" />
+                    <AntDesign name="picture" size={responsiveFontSize(3.5)} color="#006AFF" />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.icon}>
-                    <FontAwesome name="microphone" size={24} color="#006AFF" />
+                    <FontAwesome name="microphone" size={responsiveFontSize(3.5)} color="#006AFF" />
                 </TouchableOpacity>
                 <View style={styles.sendMsgContainer}>
                     <TextInput placeholder="Aa" style={styles.input}/>
-                    <Entypo name="emoji-happy" size={20} color="gray" />
+                    <Entypo name="emoji-happy" size={responsiveFontSize(2.5)} color="gray" />
                 </View>
                 <TouchableOpacity style={styles.icon}>
-                    <AntDesign name="like1" size={24} color="#006AFF" />
+                    <AntDesign name="like1" size={responsiveFontSize(3.5)} color="#006AFF" />
                 </TouchableOpacity>
-                
             </View>
         </View>
     )
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 
     },
     inputContainer : {
-        height : height / 15,
+        height : responsiveHeight(7),
         flexDirection : 'row',
         alignItems : 'center',
         shadowOffset : { width : 2, height : 2 },
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     },
     input : {
         flex : 1,
+        fontSize : responsiveFontSize(1.8)
     },
     sendMsgContainer : {
         width : '40%',

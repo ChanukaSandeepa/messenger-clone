@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-import { height } from '../constant/display'
+import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions'
 
 export default function SendMsg({ msg }) {
     return (
         <View style={styles.container}>
             <View style={styles.msgContainer}>
-    <Text style={styles.msg}>{msg}</Text>
+                <Text style={styles.msg}>{msg}</Text>
             </View>
         </View>
     )
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     },
     msg : { 
         color : 'white',
-        fontWeight : '500'
+        fontWeight : '500',
+        fontSize : responsiveFontSize(1.9)
     }
 })
