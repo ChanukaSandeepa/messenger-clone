@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import { height, width } from '../constant/display'
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions'
 
 const Chat = ({isLastMessageIYours, isSeen, message, name,navigation}) => {
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
         width : '100%',
         height : responsiveHeight(9),
         paddingHorizontal : 8,
-        marginVertical : 4
+        marginVertical : 2
     },
     proPicContainer : {
         width : '17%',

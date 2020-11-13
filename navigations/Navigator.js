@@ -9,6 +9,7 @@ import HomeHeaderButton from './HomeHeaderButton';
 import { useAppContext } from '../context/Context'
 import AllPeople from '../screens/AllPeople'
 import AddContacts from '../screens/AddContacts'
+import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions'
 
 export default function Navigator() {
 
@@ -53,7 +54,7 @@ export default function Navigator() {
                             headerLeft : () => {
                                 return (<View style={styles.chatViewHeaderLeftContainer}>
                                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                                        <Ionicons name="md-arrow-back" size={30} color="#006AFF" />
+                                        <Ionicons name="md-arrow-back" size={responsiveFontSize(3)} color="#006AFF" />
                                     </TouchableOpacity>
                                     <View style={styles.chatViewProPicContainer}>
                                         <Image style={styles.profilePic} source={{ uri : 'https://lh3.googleusercontent.com/a-/AOh14GjFaBav6WujfOcQwyJIAqzA8U9vNiKykRFcfxnAjA=s88-c-k-c0x00ffffff-no-rj-mo' }}/>
@@ -69,13 +70,13 @@ export default function Navigator() {
                                 return (
                                     <View style={styles.chatViewHeaderRightContainer}>
                                         <TouchableOpacity style={styles.call}>
-                                            <Ionicons name="ios-call" size={24} color="#006AFF" />
+                                            <Ionicons name="ios-call" size={responsiveFontSize(3)} color="#006AFF" />
                                         </TouchableOpacity>
                                         <TouchableOpacity style={styles.video}>
-                                            <FontAwesome name="video-camera" size={24} color="#006AFF" />
+                                            <FontAwesome name="video-camera" size={responsiveFontSize(3)} color="#006AFF" />
                                         </TouchableOpacity>
                                         <TouchableOpacity style={styles.info}>
-                                            <FontAwesome5 name="info-circle" size={24} color="#006AFF" />
+                                            <FontAwesome5 name="info-circle" size={responsiveFontSize(3)} color="#006AFF" />
                                         </TouchableOpacity>
                                     </View>
                                 )
@@ -111,8 +112,8 @@ export default function Navigator() {
 const styles = StyleSheet.create({
     profilePic : {
         borderRadius : 200,
-        width : 35,
-        height : 35,
+        width : responsiveHeight(5),
+        height : responsiveHeight(5),
     },
     chatViewHeaderLeftContainer : {
         flexDirection : 'row',
@@ -120,14 +121,14 @@ const styles = StyleSheet.create({
         alignItems : 'center'
     },
     name : {
-        fontSize : 18,
+        fontSize : responsiveFontSize(2),
         fontWeight : 'bold'
     },
     chatViewProPicContainer : {
         padding : 10
     },
     lastOnlineText : {
-        fontSize : 12,
+        fontSize : responsiveFontSize(1.5),
         color : 'gray'
     },
     chatViewHeaderRightContainer : {
