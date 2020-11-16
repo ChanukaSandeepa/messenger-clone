@@ -23,8 +23,5 @@ const styles = StyleSheet.create({
     cotainer : {
         flex: 1,
         backgroundColor : 'white'
-    },
-    list : {
-
     }
 })

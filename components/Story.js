@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
-import { responsiveHeight } from 'react-native-responsive-dimensions'
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions'
 
 export default function Story({color}) {
     return (
@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     container : {
         flex : 1,
         height : responsiveHeight(30),
-        padding : 5
+        padding : 5,
+        maxWidth : responsiveWidth(100) / 3
     },
     content : {
         flex : 1,

@@ -86,9 +86,9 @@ export default function AllPeople({ navigation }) {
                         </View>
                         <View style={styles.centerContainer}>
                             <View style={styles.imageContainer}>
-                                <Image style={styles.image} source={{ uri: 'https://fiverr-res.cloudinary.com/t_profile_original,q_auto,f_auto/attachments/profile/photo/9edaab3587706b3a5d3a816a313c569f-1591660947173/26586bbd-a648-4572-ac5e-05bdd1059f98.jpg' }} />
+                                <Image style={styles.image} source={{ uri: 'https://www.foleon.com/hubfs/Images/Team%20Images/sean-filidis.png' }} />
                             </View>
-                            <Text style={styles.name}>Chanuka Sandeepa</Text>
+                            <Text style={styles.name}>Ogasteen</Text>
                             <Text style={styles.facebookTitle}>Facebook</Text>
                             <Text style={styles.caption}>You're friend on Facebok</Text>
                         </View>
